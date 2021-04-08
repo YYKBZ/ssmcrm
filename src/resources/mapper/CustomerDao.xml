@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.CustomerDao">
+
+    <insert id="insertCustomer" parameterType="com.crm.pojo.Customer">
+        insert into t_customer (cname, gender, birthday, cellphone, email, description)
+        values (#{cname}, #{gender}, #{birthday}, #{cellphone}, #{email}, #{description})
+    </insert>
+
+    <select id="queryAll" resultType="com.crm.pojo.Customer">
+        select *
+        from t_customer
+    </select>
+
+    <select id="queryById" resultType="com.crm.pojo.Customer">
+        select *
+        from t_customer
+        where cid = #{cid}
+    </select>
+
+    <update id="updateCustomer" parameterType="com.crm.pojo.Customer">
+        update t_customer
+        set cname=#{cname},
+            gender=#{gender},
+            birthday=#{birthday},
+            cellphone=#{cellphone},
+            email=#{email},
+            description=#{description}
+        where cid = #{cid}
+    </update>
+
+    <delete id="delCustomer">
+        delete
+        from t_customer
+        where cid = #{cid}
+    </delete>
+
+    <select id="searchCustomer" resultType="com.crm.pojo.Customer" parameterType="com.crm.pojo.Customer">
+        select * from t_customer
+        <where>
+            <if test="cname != null">
+                and cname like '%${cname}%'
+            </if>
+            <if test="gender != null">
+                and gender =#{gender}
+            </if>
+            <if test="cellphone !=null">
+                and cellphone =#{cellphone}
+            </if>
+            <if test="email !=null">
+                and email =#{email}
+            </if>
+        </where>
+    </select>
+</mapper>
