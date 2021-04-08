@@ -38,20 +38,20 @@
     </delete>
 
     <select id="searchCustomer" resultType="com.crm.pojo.Customer" parameterType="com.crm.pojo.Customer">
-        select * from t_customer
-        <where>
-            <if test="cname != null">
-                and cname like '%${cname}%'
-            </if>
-            <if test="gender != null">
-                and gender =#{gender}
-            </if>
-            <if test="cellphone !=null">
-                and cellphone =#{cellphone}
-            </if>
-            <if test="email !=null">
-                and email =#{email}
-            </if>
-        </where>
+   select * from t_customer
+<where>
+    <if test="cname != null and cname !=''">
+        and cname like '%${cname}%'
+    </if>
+    <if test="gender != null and gender != ''">
+        and gender=#{gender}
+    </if>
+    <if test="cellphone != null and cellphone != ''">
+        and cellphone=#{cellphone}
+    </if>
+    <if test="email != null and email != ''">
+        and email=#{email}
+    </if>
+</where>
     </select>
 </mapper>
